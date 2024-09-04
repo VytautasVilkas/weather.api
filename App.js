@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { getWeather } = require('./controllers/weatherController'); 
 const app = express();
-const port = process.env.PORT || 8080;
+
 app.use(cors({
   origin: 'https://wb-cyr1bmo9a-vytautasvilkas-projects.vercel.app/',  
   credentials: true,  
