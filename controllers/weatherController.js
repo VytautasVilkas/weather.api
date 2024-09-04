@@ -1,6 +1,6 @@
-
 const axios = require('axios');
-const getWeather = async (req, res) => {
+
+module.exports = async (req, res) => {
   const city = req.query.city;
   const apiKey = process.env.WEATHER_API_KEY;
 
@@ -12,15 +12,13 @@ const getWeather = async (req, res) => {
     const response = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
       params: {
         q: city,
-        appid: apiKey,  
-        units: 'metric',  
+        appid: apiKey,
+        units: 'metric',
       },
     });
 
-    // Send back the weather data
-    res.json(response.data);
+    res.status(200).json(response.data);
   } catch (error) {
-    // Handle errors from the API
     if (error.response && error.response.status === 404) {
       res.status(404).json({ error: 'City not found' });
     } else {
@@ -28,5 +26,3 @@ const getWeather = async (req, res) => {
     }
   }
 };
-
-module.exports = { getWeather };
